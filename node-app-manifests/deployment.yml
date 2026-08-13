@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: asifpsdocker/ultimate-cicd:latest
+        image: asifpsdocker/ultimate-cicd:16
         ports:
         - containerPort: 3000
         resources:
