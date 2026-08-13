@@ -27,20 +27,18 @@ pipeline {
     stage('SonarQube Analysis') {
     steps {
         withSonarQubeEnv('SonarQube') {
-            sh '''
-                export HOME="$WORKSPACE"
-                export npm_config_cache="$WORKSPACE/.npm"
-
-                npm install -g sonarqube-scanner
-
-                cd node-app
-
-                sonar-scanner \
-                  -Dsonar.projectKey=node-express-app \
-                  -Dsonar.projectName="Node Express App" \
-                  -Dsonar.sources=. \
-                  -Dsonar.exclusions=node_modules/*,coverage/*
-            '''
+            script {
+                def scannerHome = tool 'SonarScanner'
+                
+                sh """
+                    cd node-app
+                    ${scannerHome}/bin/sonar-scanner \
+                      -Dsonar.projectKey=node-express-app \
+                      -Dsonar.projectName="Node Express App" \
+                      -Dsonar.sources=. \
+                      -Dsonar.exclusions=node_modules/*,coverage/*
+                """
+            }
         }
     }
 }
