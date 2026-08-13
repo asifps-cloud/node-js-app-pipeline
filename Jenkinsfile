@@ -28,7 +28,13 @@ pipeline {
     steps {
         withSonarQubeEnv('SonarQube') {
             sh '''
+                export HOME="$WORKSPACE"
+                export npm_config_cache="$WORKSPACE/.npm"
+
+                npm install -g sonarqube-scanner
+
                 cd node-app
+
                 sonar-scanner \
                   -Dsonar.projectKey=node-express-app \
                   -Dsonar.projectName="Node Express App" \
