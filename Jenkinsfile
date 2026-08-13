@@ -70,7 +70,7 @@ pipeline {
 ]) {
             sh '''
                 rm -rf repo-temp
-                git clone https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git repo-temp
+                git clone https://asifps-cloud:${GITHUB_TOKEN}@github.com/asifps-cloud/node-js-app-pipeline.git repo-temp
                 cd repo-temp
                 
                 git config user.email "asifdua7@gmail.com"
