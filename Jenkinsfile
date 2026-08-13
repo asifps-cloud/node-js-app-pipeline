@@ -1,10 +1,10 @@
 pipeline {
   agent {
     docker {
-        image 'node:20-alpine'
-        args '-u 105:109 -v /var/run/docker.sock:/var/run/docker.sock'
+        image 'jenkins-node-sonar'
+        args '-v /var/run/docker.sock:/var/run/docker.sock'
     }
-  }
+}
   stages {
     stage('Checkout') {
       steps {
