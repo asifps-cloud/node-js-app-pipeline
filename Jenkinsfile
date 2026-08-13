@@ -22,20 +22,19 @@ pipeline {
     }
     
     stage('SonarQube Analysis') {
-      steps {
+    steps {
         withSonarQubeEnv('SonarQube') {
-          sh '''
-            cd node-app
-            npx sonar-scanner \
-              -Dsonar.projectKey=node-express-app \
-              -Dsonar.projectName="Node Express App" \
-              -Dsonar.sources=. \
-              -Dsonar.exclusions=node_modules/*,coverage/* \
-              -Dsonar.host.url=$SONAR_HOST_URL
-          '''
+            sh '''
+                cd node-app
+                sonar-scanner \
+                  -Dsonar.projectKey=node-express-app \
+                  -Dsonar.projectName="Node Express App" \
+                  -Dsonar.sources=. \
+                  -Dsonar.exclusions=node_modules/*,coverage/*
+            '''
         }
-      }
     }
+}
 
     stage('Build and Push Docker Image') {
       environment {
