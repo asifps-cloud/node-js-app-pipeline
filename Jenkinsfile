@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
         image 'jenkins-node-sonar'
-        args '-v /var/run/docker.sock:/var/run/docker.sock'
+        args '--group-add 110 -v /var/run/docker.sock:/var/run/docker.sock'
     }
 }
   stages {
