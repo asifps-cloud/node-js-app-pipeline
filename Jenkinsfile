@@ -78,7 +78,7 @@ pipeline {
 
                 git add node-app-manifests/deployment.yml
                 git commit -m "Update static site image tag to ${BUILD_NUMBER} [skip ci]" || echo "No changes to commit"
-                git push origin main
+                git push origin master
             '''
         }
       }
