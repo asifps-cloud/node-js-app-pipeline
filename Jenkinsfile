@@ -1,8 +1,8 @@
 pipeline {
   agent {
     docker {
-      image 'node:20-alpine'
-      args '-u 105:109 -v /var/run/docker.sock:/var/run/docker.sock'
+        image 'node:20-alpine'
+        args '-u 105:109 -v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
   stages {
@@ -12,14 +12,17 @@ pipeline {
       }
     }
     stage('Build and Test') {
-      steps {
+    steps {
         sh '''
-          cd node-app
-          npm ci
-          npm test
+            export HOME="$WORKSPACE"
+            export npm_config_cache="$WORKSPACE/.npm"
+
+            cd node-app
+            npm ci
+            npm test
         '''
-      }
     }
+}
     
     stage('SonarQube Analysis') {
     steps {
