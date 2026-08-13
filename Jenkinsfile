@@ -62,13 +62,12 @@ pipeline {
         GIT_USER_NAME = "asifps-cloud"
       }
       steps {
-        withCredentials([
-            usernamePassword(
-                credentialsId: 'github',
-                usernameVariable: 'GITHUB_USERNAME',
-                passwordVariable: 'GITHUB_TOKEN'
-            )
-        ]) {
+       withCredentials([
+    string(
+        credentialsId: 'github',
+        variable: 'GITHUB_TOKEN'
+    )
+]) {
             sh '''
                 rm -rf repo-temp
                 git clone https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git repo-temp
